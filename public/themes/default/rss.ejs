@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+ <title>The Awesome blog</title>
+ <description>This is it.</description>
+ <link>http://blog.example.com/</link>
+
+ <lastBuildDate><%= lastBuildDate.toUTCString() %></lastBuildDate>
+ <ttl><%= ttl %></ttl>
+
+ <% for (var i in entries) { %>
+ <item>
+  <title><%= entries[i].title %></title>
+  <guid><%= entries[i].slug %></guid>
+  <pubDate><%= entries[i].date.toUTCString() %></pubDate>
+  <% if (entries[i].description) { %>
+  <description><%= entries[i].description %></description>
+  <% } %>
+ </item>
+ <% } %>
+ 
+</channel>
+</rss>

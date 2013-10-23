@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>The Awesome blog</title>
+    <link rel="canonical" href="/" />
+    <link rel="stylesheet" href="/themes/default/style.css" />
+    <meta name="viewport" content="width=640" />
+  </head>
+  <body>
+    <div id="header">
+      <div class="navigation">
+        <ul>
+          <li><a href="/">~</a></li>
+          <li><a href="/about">~/about</a></li>
+        </ul>
+      </div>
+      <div class="meta">
+      </div>
+    </div>
+    <div id="content">
+      <div id="banner">
+      <a href="http://www.flickr.com/photos/nationallibrarynz_commons/3326203787/" title="Election night crowd, Wellington, 1931 by National Library NZ on The Commons, on Flickr"><img src="https://farm4.staticflickr.com/3349/3326203787_cb98e21776.jpg" width="500" height="349" alt="Election night crowd, Wellington, 1931"></a>
+      </div>
+      <% if (entries && entries.length > 0) { %>
+      <ul id="entries">
+        <% for (var i in entries) { %>
+        <li><a href="/<%= entries[i].slug %>"><%= entries[i].title %></a></li>
+        <% } %>
+      </ul>
+      <div class="navigation">
+        <% if (previousPage) { %>
+        <a href="?page=<%= previousPage %>">&lsaquo;</a>
+        <% } %>
+        <% if (nextPage) { %>
+        <a href="?page=<%= nextPage %>">&rsaquo;</a>
+        <% } %>
+      </div>
+      <% } %>
+    </div>
+    <div id="footer">
+      <div class="copyright">
+        &copy; Awesome Corp.
+      </div>
+    </div>
+  </body>
+</html>

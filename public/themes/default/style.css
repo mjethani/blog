@@ -1,0 +1,97 @@
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: white;
+  color: black;
+  padding: 50px 80.9px;
+  font: 14px/1.5 "Lucida Grande", Helvetica, Arial, sans-serif;
+  max-width: 500px;
+  width: 500px;
+  margin: 0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#header {
+  margin-bottom: 50px;
+}
+
+#header .navigation {
+  font-size: x-small;
+}
+
+#header .navigation ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#header .navigation ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+#header .navigation a {
+  color: black;
+  text-decoration: none;
+  border-bottom: 1px dotted black;
+}
+
+#content #banner {
+  margin-bottom: 50px;
+}
+
+#content img {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  height: auto;
+}
+
+#content pre {
+  background: #F4F4F4;
+  color: #000;
+  padding: 9px;
+  border: 1px solid #DDD;
+  border-radius: 3px;
+  line-height: normal;
+  word-wrap: break-word;
+}
+
+#content ul#entries {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#content ul#entries li a {
+  text-decoration: none;
+}
+
+#content .navigation a {
+  color: silver;
+  text-decoration: none;
+}
+
+#date {
+  font-size: x-small;
+  color: silver;
+}
+
+#footer {
+  margin: 50px 0;
+}
+
+#footer .copyright {
+  font-size: x-small;
+  color: gray;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+

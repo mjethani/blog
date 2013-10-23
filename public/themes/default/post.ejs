@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <% if (description) { %>
+    <meta name="description" content="<%= description %>" />
+    <% } %>
+    <link rel="canonical" href="/<%= slug %>" />
+    <link rel="stylesheet" href="/themes/default/style.css" />
+    <meta name="viewport" content="width=640" />
+  </head>
+  <body>
+    <div id="header">
+      <div class="navigation">
+        <ul>
+          <li><a href="/">~</a></li>
+          <li><a href="/about">~/about</a></li>
+        </ul>
+      </div>
+      <div class="meta">
+        <% if (date) { %>
+        <span id="date"><%= date.toLocaleDateString() %></span>
+        <% } %>
+      </div>
+    </div>
+    <div id="content"><%- content %></div>
+    <div id="footer">
+      <div class="copyright">
+        &copy; <%= date && date.getUTCFullYear() || '' %> Awesome Corp. All Rights Reserved.
+      </div>
+    </div>
+  </body>
+</html>

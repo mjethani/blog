@@ -4,6 +4,10 @@
 
 mode=production
 
+if [ ! -f config.ini ]; then
+  touch config.ini
+fi
+
 if [ $# -gt 0 ]; then
   mode=$1
 else

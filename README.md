@@ -1,8 +1,6 @@
-Coming soon.
-
 http://blog.manishjethani.com/
 
-----
+--
 
     git clone https://github.com/mjethani/blog.git
     cd blog

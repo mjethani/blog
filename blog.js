@@ -311,6 +311,15 @@ module.exports = function (config) {
           throw error;
         }
 
+        if (output.length <= 1024) {
+          // Express will generate an ETag and do gzip/deflate only if the
+          // output is more than 1,024 bytes (characters?). This may be an
+          // acceptable tradeoff in general, but in our case we benefit by
+          // trying to meet the threshold anyhow. This is HTML; add whitespace
+          // at the end of the document.
+          output += Array(1024 + 1 - output.length + 1).join(' ');
+        }
+
         renderCache.posts[post.slug] = {
           html: html,
           output: output,

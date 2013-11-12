@@ -34,8 +34,8 @@ var themeDirectory = path.join(__dirname, 'public', 'themes',
 app.set('port', process.env.PORT || 3000);
 app.set('views', themeDirectory);
 app.set('view engine', 'ejs');
-//app.use(express.favicon());
 app.use(express.logger('dev'));
+app.use(express.favicon(path.join(themeDirectory, 'favicon.ico')));
 app.use(express.compress());
 app.use(express.bodyParser());
 app.use(express.methodOverride());

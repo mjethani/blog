@@ -326,10 +326,18 @@ module.exports = function (config) {
           ref: post
         };
 
+        if (post.meta['status'] === 'draft') {
+          res.set('X-Robots-Tag', 'noindex, nofollow');
+        }
+
         res.send(output);
       });
 
     } else {
+      if (post.meta['status'] === 'draft') {
+        res.set('X-Robots-Tag', 'noindex, nofollow');
+      }
+
       res.send(obj.output);
     }
   }

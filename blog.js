@@ -528,7 +528,7 @@ module.exports = function (config) {
             renderIndex(index, res, options);
 
           } catch (e) {
-            next(error);
+            next(e);
           }
         }
       });

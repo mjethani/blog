@@ -78,7 +78,8 @@ if (config['rss']) {
 app.get('/tag/:tag', routes.tag);
 
 if (config['sitemap']) {
-  app.get('/sitemap.txt', routes.sitemap);
+  app.get('/' + (config['sitemap'] === true ? 'sitemap.txt' : config['sitemap']),
+      routes.sitemap);
 }
 
 if (config['raw']) {

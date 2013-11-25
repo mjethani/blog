@@ -81,6 +81,10 @@ if (config['sitemap']) {
   app.get('/sitemap.txt', routes.sitemap);
 }
 
+if (config['raw']) {
+  app.get('/raw/:slug', routes.raw);
+}
+
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });

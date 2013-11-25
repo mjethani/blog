@@ -264,11 +264,23 @@ module.exports = function (config) {
     return obj;
   }
 
-  function renderPost(post, res) {
+  function renderPost(post, res, options) {
     var html;
     var tokens;
+    var raw;
 
     var obj, date;
+
+    options = options || {};
+
+    raw = !!options.raw;
+
+    if (raw) {
+      res.set('X-Robots-Tag', 'noindex, nofollow');
+
+      res.send(post.data);
+      return;
+    }
 
     obj = renderCache.posts[post.slug];
 
@@ -519,13 +531,17 @@ module.exports = function (config) {
   function handlePostRequest(req, res, next) {
     var slug = req.params.slug;
 
+    var options = {
+      raw: res.get('Content-Type') === 'text/plain'
+    };
+
     if (slug.charAt(0) === '.') {
       next();
       return;
     }
 
     if (isPostAvailable(slug)) {
-      renderPost(getPost(slug), res);
+      renderPost(getPost(slug), res, options);
 
     } else {
       loadPost(slug, function (error, post) {
@@ -538,7 +554,7 @@ module.exports = function (config) {
 
         } else {
           try {
-            renderPost(post, res);
+            renderPost(post, res, options);
 
           } catch (e) {
             next(e);
@@ -605,6 +621,12 @@ module.exports = function (config) {
     }
   }
 
+  function handleRawRequest(req, res, next) {
+    res.type('text');
+
+    handlePostRequest(req, res, next);
+  }
+
   return {
     getRoutes: function () {
       return {
@@ -614,6 +636,7 @@ module.exports = function (config) {
         rss:     handleRssRequest,
         tag:     handleIndexRequest,
         sitemap: handleSitemapRequest,
+        raw:     handleRawRequest,
       };
     },
   };

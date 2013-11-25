@@ -398,7 +398,7 @@ module.exports = function (config) {
           continue;
         }
 
-        if (post.meta['status'] === 'draft') {
+        if (slug.charAt(0) === '-' || post.meta['status'] === 'draft') {
           continue;
         }
 
@@ -508,7 +508,7 @@ module.exports = function (config) {
     n = 0;
 
     for (slug in index) {
-      if (index[slug].meta['status'] === 'draft') {
+      if (slug.charAt(0) === '-' || index[slug].meta['status'] === 'draft') {
         continue;
       }
 

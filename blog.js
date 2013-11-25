@@ -11,6 +11,8 @@ module.exports = function (config) {
 
   var url = config['url'];
 
+  var hotIndex = config['hot index'];
+
   var cache = {};
   var watchers = {};
 
@@ -58,6 +60,15 @@ module.exports = function (config) {
           delete watchers[slug];
 
           delete cache[slug];
+        }
+
+        if (hotIndex) {
+          // Invalidate the index cache. This is useful for development and
+          // also if you make frequent changes but want to keep cache timeout
+          // relatively high.
+
+          // Note: This is expensive.
+          indexCache = null;
         }
       });
 

@@ -77,6 +77,10 @@ if (config['rss']) {
 
 app.get('/tag/:tag', routes.tag);
 
+if (config['sitemap']) {
+  app.get('/sitemap.txt', routes.sitemap);
+}
+
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });

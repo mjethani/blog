@@ -9,6 +9,8 @@ module.exports = function (config) {
 
   var indexPageSize = +config['index page size'] || 10;
 
+  var url = config['url'];
+
   var cache = {};
   var watchers = {};
 
@@ -476,6 +478,44 @@ module.exports = function (config) {
     }
   }
 
+  function renderSitemap(index, res) {
+    var slug;
+
+    var p, n;
+
+    if (!url) {
+      throw new Error('No URL.');
+    }
+
+    p = url;
+
+    if (p.charAt(p.length - 1) !== '/') {
+      p += '/';
+    }
+
+    n = 0;
+
+    for (slug in index) {
+      if (index[slug].meta['status'] === 'draft') {
+        continue;
+      }
+
+      res.write(p + slug, 'utf8');
+
+      if (n === 0) {
+        p = '\n' + p;
+      }
+
+      // Maximum 50,000 URLs
+      // http://www.sitemaps.org/protocol.html
+      if (++n === 50000) {
+        break;
+      }
+    }
+
+    res.end();
+  }
+
   function handlePostRequest(req, res, next) {
     var slug = req.params.slug;
 
@@ -542,14 +582,38 @@ module.exports = function (config) {
     handleIndexRequest(req, res, next);
   }
 
+  function handleSitemapRequest(req, res, next) {
+    res.type('text');
+
+    if (isIndexAvailable()) {
+      renderSitemap(getIndex(), res);
+
+    } else {
+      loadIndex(function (error, index) {
+        if (error) {
+          next(error);
+
+        } else {
+          try {
+            renderSitemap(index, res);
+
+          } catch (e) {
+            next(e);
+          }
+        }
+      });
+    }
+  }
+
   return {
     getRoutes: function () {
       return {
         // Entry points
-        post:  handlePostRequest,
-        index: handleIndexRequest,
-        rss:   handleRssRequest,
-        tag:   handleIndexRequest,
+        post:    handlePostRequest,
+        index:   handleIndexRequest,
+        rss:     handleRssRequest,
+        tag:     handleIndexRequest,
+        sitemap: handleSitemapRequest,
       };
     },
   };
